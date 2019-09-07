@@ -16,7 +16,7 @@ else
   "_error": {
     "msg": "'puppet agent --fingerprint' failed",
     "kind": "puppetlabs.tasks/task-error",
-    "details": { "exitcode"; 1 }
+    "details": { "exitcode": 1 }
   }
 }
 EOF
