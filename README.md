@@ -32,6 +32,38 @@ targets:
 
 ## Commissioning a new node
 
+Adjust your inventory file so that you can connect as root without specifying arguments.  The exact command `bolt command run id -n host4.example.com` should succeed show you are _root_.
+
+```sh-session
+romain@marvin ~ % bolt command run id -n host4.example.com
+Started on host4.example.com...
+Finished on host4.example.com:
+  STDOUT:
+    uid=0(root) gid=0(root) groups=0(root)
+Successful on 1 node: host4.example.com
+Ran on 1 node in 2.12 sec
+```
+This can be achieved using something similar to the following in your inventory file:
+
+```yaml
+version: 2
+targets:
+  - name: "host4.example.com"
+    uri: "host4.example.com"
+    config:
+      ssh:
+        user: "root"
+        password: "secret"
+  - name: "host5.example.com"
+    uri: "host5.example.com"
+    config:
+      ssh:
+        user: "root"
+        password: "secret"
+```
+
+You can then commission the nodes:
+
 ```
 bolt plan run commission::commission -n host4.example.com,host5.example.com custom_facts=example_fact1=true,example_fact2=false puppet_settings=server=puppet.example.com,splay=true
 ```
@@ -42,9 +74,13 @@ bolt plan run commission::commission -n host4.example.com,host5.example.com cust
 
 A coma-separated list of `name=value` facts.  Each fact will be configured as a structured data fact using a YAML file.
 
+Example: `custom_facts=customer=foo,provider=bar`
+
 #### `puppet_settings`
 
 A coma-separated list of `name=value` settings.
+
+Example: `puppet_settings=server=puppet.example.com,splay=true`
 
 ## Decommissioning an old node
 
