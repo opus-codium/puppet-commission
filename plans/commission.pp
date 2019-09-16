@@ -11,7 +11,7 @@ plan commission::commission(TargetSpec $nodes, Optional[String] $custom_facts, O
     run_script('commission/setup-puppet-agent.sh', $nodes, '_run_as' => 'root', 'arguments' => $puppet_settings)
   }
 
-  run_command('/opt/puppetlabs/bin/puppet agent --test', $nodes, '_run_as' => 'root')
+  run_command('/opt/puppetlabs/bin/puppet agent --test', $nodes, '_run_as' => 'root', '_catch_errors' => true)
 
   $fingerprints = run_task('commission::agent_certificate_fingerprint', $nodes, '_run_as' => 'root')
   $fingerprints.each |$result| {
