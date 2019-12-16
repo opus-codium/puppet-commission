@@ -15,7 +15,7 @@ plan commission::commission(TargetSpec $nodes, Optional[String] $custom_facts, O
 
   $fingerprints = run_task('commission::agent_certificate_fingerprint', $nodes, '_run_as' => 'root')
   $fingerprints.each |$result| {
-    run_task('commission::sign_agent_certificate', 'puppet', '_run_as' => 'root', 'certname' => $result.target.name, 'digest' => $result['digest'], 'fingerprint' => $result['fingerprint'])
+    run_task('commission::sign_agent_certificate', 'puppet', '_run_as' => 'root', 'certname' => $result.target.name.regsubst('^[[:alpha:]]+@', '').regsubst(':[[:digit:]]+$', ''), 'digest' => $result['digest'], 'fingerprint' => $result['fingerprint'])
   }
 
   run_task('service', $nodes, 'Starting puppet', '_run_as' => 'root', 'action' => 'start', 'name' => 'puppet')
