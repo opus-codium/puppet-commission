@@ -1,4 +1,7 @@
 plan commission::commission(TargetSpec $nodes, Optional[String] $custom_facts, Optional[String] $puppet_settings) {
+  # lspci is needed by facter to determine if a node is physical or virutal
+  run_task('package', $nodes, 'install lspci', '_run_as' => 'root', 'action' => 'install', 'name' => 'pciutils')
+
   upload_file('commission/motd.commissioned', '/etc/motd', $nodes, '_run_as' => 'root')
 
   run_task('puppet_agent::install', $nodes, '_run_as' => 'root')
