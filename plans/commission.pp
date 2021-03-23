@@ -1,3 +1,4 @@
+# Commission a node and connect it to the Puppet infrastructure
 plan commission::commission(TargetSpec $nodes, Optional[String] $custom_facts, Optional[String] $puppet_settings) {
   # lspci is needed by facter to determine if a node is physical or virutal
   run_task('package', $nodes, 'install lspci', '_run_as' => 'root', 'action' => 'install', 'name' => 'pciutils')
