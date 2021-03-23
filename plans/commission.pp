@@ -7,11 +7,11 @@ plan commission::commission(TargetSpec $nodes, Optional[String] $custom_facts, O
   run_task('puppet_agent::install', $nodes, '_run_as' => 'root')
 
   if $custom_facts {
-    run_script('commission/setup-custom-facts.sh', $nodes, '_run_as' => 'root', 'arguments' => $custom_facts)
+    run_script('commission/setup-custom-facts.sh', $nodes, '_run_as' => 'root', 'arguments' => [$custom_facts])
   }
 
   if $puppet_settings {
-    run_script('commission/setup-puppet-agent.sh', $nodes, '_run_as' => 'root', 'arguments' => $puppet_settings)
+    run_script('commission/setup-puppet-agent.sh', $nodes, '_run_as' => 'root', 'arguments' => [$puppet_settings])
   }
 
   run_command('/opt/puppetlabs/bin/puppet agent --test', $nodes, '_run_as' => 'root', '_catch_errors' => true)
