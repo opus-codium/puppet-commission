@@ -1,0 +1,36 @@
+{
+  "name": "opuscodium-commission",
+  "version": "0.0.0",
+  "author": "Opus Codium",
+  "summary": "Commission / decommission Puppet nodes easily",
+  "license": "MIT",
+  "source": "https://github.com/opus-codium/puppet-commission",
+  "project_page": "https://github.com/opus-codium/puppet-commission",
+  "issues_url": "https://github.com/opus-codium/puppet-commission/issues",
+  "dependencies": [
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "8",
+        "9",
+        "10"
+      ]
+    },
+    {
+      "operatingsystem": "FreeBSD",
+      "operatingsystemrelease": [
+        "11",
+        "12",
+        "13"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 5.0.0 < 8.0.0"
+    }
+  ]
+}
