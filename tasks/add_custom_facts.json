@@ -1,0 +1,15 @@
+{
+  "description": "Add custom facts",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "input_method": "stdin",
+  "parameters": {
+    "custom_facts_dir": {
+      "description": "The directory of custom facts",
+      "type": "Optional[Stdlib::AbsolutePath]"
+    },
+    "facts": {
+      "description": "The facts to set",
+      "type": "Hash[String[1],Any]"
+    }
+  }
+}

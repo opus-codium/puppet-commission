@@ -8,6 +8,10 @@
   "project_page": "https://github.com/opus-codium/puppet-commission",
   "issues_url": "https://github.com/opus-codium/puppet-commission/issues",
   "dependencies": [
+    {
+      "name": "puppetlabs/ruby_task_helper",
+      "version_requirement": ">= 0.6.0 < 1.0.0"
+    }
   ],
   "operatingsystem_support": [
     {
