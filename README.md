@@ -16,14 +16,14 @@ Finished on host2.example.com:
     host2.example.com
 Successful on 1 node: host2.example.com
 Ran on 1 node in 2.21 seconds
-romain@marvin ~ % 
+romain@marvin ~ %
 ```
 
 This can be easily achieved by [providing an alias to a target in your inventory file](https://puppet.com/docs/bolt/latest/inventory_file_v2.html#provide-an-alias-to-a-target), e.g.:
 
 ```yaml
 version: 2
-targets: 
+targets:
   - host1.example.com
   - uri: host2.example.com
     alias: puppet
