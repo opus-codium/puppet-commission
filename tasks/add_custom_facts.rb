@@ -30,4 +30,4 @@ class CustomFactsAdder < TaskHelper
   end
 end
 
-CustomFactsAdder.run if __FILE__ == $PROGRAM_NAME
+CustomFactsAdder.run if $PROGRAM_NAME == __FILE__
