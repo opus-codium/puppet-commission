@@ -1,4 +1,8 @@
 # Commission a node and connect it to the Puppet infrastructure
+#
+# @param nodes The nodes to commission
+# @param custom_facts Custom facts to set on comissioned nodes
+# @param puppet_settings Puppet settings to configure on comissioned nodes
 plan commission::commission(TargetSpec $nodes, Hash[String[1],Any] $custom_facts = {}, Optional[String] $puppet_settings) {
   $commission_timestamp = Timestamp()
 
