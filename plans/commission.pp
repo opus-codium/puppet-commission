@@ -1,5 +1,7 @@
 # Commission a node and connect it to the Puppet infrastructure
 plan commission::commission(TargetSpec $nodes, Hash[String[1],Any] $custom_facts = {}, Optional[String] $puppet_settings) {
+  $commission_timestamp = Timestamp()
+
   upload_file('commission/motd.commissioned', '/etc/motd', $nodes, '_run_as' => 'root')
 
   # lspci is needed by facter to determine if a node is physical or virutal
@@ -21,4 +23,6 @@ plan commission::commission(TargetSpec $nodes, Hash[String[1],Any] $custom_facts
   }
 
   run_task('service', $nodes, 'Starting puppet', '_run_as' => 'root', 'action' => 'start', 'name' => 'puppet')
+
+  run_task('commission::add_custom_facts', $nodes, '_run_as' => 'root', 'facts' => { 'comissioned_at' => $commission_timestamp })
 }
