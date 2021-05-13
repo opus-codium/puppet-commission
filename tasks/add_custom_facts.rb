@@ -9,7 +9,7 @@ require_relative '../../ruby_task_helper/files/task_helper'
 class CustomFactsAdder < TaskHelper
   def task(facts: nil, custom_facts_dir: nil, **_kwargs)
     if custom_facts_dir.nil?
-      stdout, _stderr, _status = Open3.capture3('facter', '-p', 'osfamily')
+      stdout, _stderr, _status = Open3.capture3('facter', 'osfamily')
       osfamily = stdout.strip
       custom_facts_dir = case osfamily
                          when 'FreeBSD'
