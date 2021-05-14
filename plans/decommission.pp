@@ -1,4 +1,6 @@
 # Decommission a node and disconnect it from the Puppet infrastructure
+#
+# @param nodes The nodes to decommission
 plan commission::decommission(TargetSpec $nodes) {
   upload_file('commission/motd.decommissioned', '/etc/motd', $nodes, '_run_as' => 'root')
 
