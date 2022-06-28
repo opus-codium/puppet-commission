@@ -12,7 +12,7 @@ class CustomFactsAdder < TaskHelper
     if custom_facts_dir.nil?
       # Prepend AIO path if it exist and is not in $PATH
       if File.directory?('/opt/puppetlabs/puppet/bin') &&
-          !ENV['PATH'].split(':').include?('/opt/puppetlabs/puppet/bin')
+         !ENV['PATH'].split(':').include?('/opt/puppetlabs/puppet/bin')
         ENV['PATH'] = "/opt/puppetlabs/puppet/bin:#{ENV['PATH']}"
       end
 
@@ -34,6 +34,8 @@ class CustomFactsAdder < TaskHelper
 
       IO.write(fact_yaml_path, fact_yaml)
     end
+
+    nil
   end
 end
 
