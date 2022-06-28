@@ -10,6 +10,12 @@ require_relative '../../ruby_task_helper/files/task_helper'
 class CustomFactsAdder < TaskHelper
   def task(facts: nil, custom_facts_dir: nil, **_kwargs)
     if custom_facts_dir.nil?
+      # Prepend AIO path if it exist and is not in $PATH
+      if File.directory?('/opt/puppetlabs/puppet/bin') &&
+          !ENV['PATH'].split(':').include?('/opt/puppetlabs/puppet/bin')
+        ENV['PATH'] = "/opt/puppetlabs/puppet/bin:#{ENV['PATH']}"
+      end
+
       stdout, _stderr, _status = Open3.capture3('facter', 'os.family')
       osfamily = stdout.strip
       custom_facts_dir = case osfamily
