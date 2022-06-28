@@ -3,7 +3,11 @@
 # @param nodes The nodes to commission
 # @param custom_facts Custom facts to set on comissioned nodes
 # @param puppet_settings Puppet settings to configure on comissioned nodes
-plan commission::commission(TargetSpec $nodes, Hash[String[1],Any] $custom_facts = {}, Optional[String] $puppet_settings) {
+plan commission::commission(
+  TargetSpec $nodes,
+  Hash[String[1], Any] $custom_facts = {},
+  Hash[String[1], Any] $puppet_settings = {},
+) {
   $commission_timestamp = Timestamp()
 
   upload_file('commission/motd.commissioned', '/etc/motd', $nodes, '_run_as' => 'root')
@@ -15,9 +19,7 @@ plan commission::commission(TargetSpec $nodes, Hash[String[1],Any] $custom_facts
 
   run_task('commission::add_custom_facts', $nodes, '_run_as' => 'root', 'facts' => $custom_facts)
 
-  if $puppet_settings {
-    run_script('commission/setup-puppet-agent.sh', $nodes, '_run_as' => 'root', 'arguments' => [$puppet_settings])
-  }
+  run_task('commission::set_puppet_config', $nodes, '_run_as' => 'root', 'settings' => $puppet_settings)
 
   run_command('/opt/puppetlabs/bin/puppet agent --test', $nodes, '_run_as' => 'root', '_catch_errors' => true)
 
