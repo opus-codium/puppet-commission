@@ -1,0 +1,4 @@
+{
+  "description": "Get the fingerprint of the certificate request of a Puppet node",
+  "files": ["ruby_task_helper/files/task_helper.rb"]
+}

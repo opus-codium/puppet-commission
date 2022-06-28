@@ -21,10 +21,14 @@ plan commission::commission(TargetSpec $nodes, Hash[String[1],Any] $custom_facts
 
   run_command('/opt/puppetlabs/bin/puppet agent --test', $nodes, '_run_as' => 'root', '_catch_errors' => true)
 
-  $fingerprints = run_task('commission::agent_certificate_fingerprint', $nodes, '_run_as' => 'root')
-  $fingerprints.each |$result| {
-    run_task('commission::sign_agent_certificate', 'puppet', '_run_as' => 'root', 'certname' => $result.target.name.regsubst('^[[:alpha:]]+@', '').regsubst(':[[:digit:]]+$', ''), 'digest' => $result['digest'], 'fingerprint' => $result['fingerprint'])
-  }
+  $certificate_requests = Hash(run_task('commission::get_certificate_request', $nodes, '_run_as' => 'root').map |$result| {
+      # Extract the cername from the ssh connexion string that can be in the form [user@]certname[:port]
+      $certname = $result.target.name.regsubst('^[[:alpha:]]+@', '').regsubst(':[[:digit:]]+$', '')
+
+      Array([$certname, $result.value])
+  })
+
+  run_task('commission::sign_certificate_requests', 'puppet', '_run_as' => 'root', certificate_requests => $certificate_requests)
 
   run_task('service', $nodes, 'Starting puppet', '_run_as' => 'root', 'action' => 'start', 'name' => 'puppet')
 
