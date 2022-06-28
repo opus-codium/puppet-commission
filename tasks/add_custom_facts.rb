@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require 'fileutils'
+require 'open3'
 require 'yaml'
 
 require_relative '../../ruby_task_helper/files/task_helper'
