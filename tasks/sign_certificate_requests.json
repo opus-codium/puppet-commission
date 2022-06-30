@@ -1,0 +1,11 @@
+{
+  "description": "Sign certificate requests on the Puppet Server",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "input_method": "stdin",
+  "parameters": {
+    "certificate_requests": {
+      "description": "Attributes of the certificate requests to sign",
+      "type": "Hash[String[1], Struct[{digest => String[1], fingerprint => String[1]}]]"
+    }
+  }
+}
