@@ -1,0 +1,11 @@
+{
+  "description": "Set Puppet configuration",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "input_method": "stdin",
+  "parameters": {
+    "settings": {
+      "description": "The settings to set",
+      "type": "Hash[String[1],Any]"
+    }
+  }
+}
