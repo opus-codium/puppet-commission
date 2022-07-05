@@ -1,0 +1,11 @@
+{
+  "description": "Deactivate nodes in PuppetDB",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "input_method": "stdin",
+  "parameters": {
+    "nodes": {
+      "description": "The nodes to deactivate",
+      "type": "Array[String[1]]"
+    }
+  }
+}
