@@ -13,86 +13,44 @@ Commission / decommission Puppet nodes easily.
 
 This module provides [Bolt](https://puppet.com/docs/bolt/latest/bolt.html) plans to commission / decommission [Puppet](https://puppet.com/docs/puppet/latest/puppet_index.html) nodes.
 
-## Prerequisites
+## Getting started
 
-The name `puppet` must be something that resolves to your site's Puppet Master.  In other word, the exact command `bolt command run 'hostname -f' -n puppet` should succeed.
+Use this module to setup commissioning / decommissioning plans tailored to your site.  We ship two sample plans with the module: `commission::commission` and `commission::decommission`.  These plans are site-agnostic and not too much opiniated to be used in any infrastructure.  Use them to give a try to the module and as a template for your site-specific plans.
 
-```sh-session
-romain@marvin ~ % bolt command run 'hostname -f' -n puppet
-Started on host2.example.com...
-Finished on host2.example.com:
-  STDOUT:
-    host2.example.com
-Successful on 1 node: host2.example.com
-Ran on 1 node in 2.21 seconds
-romain@marvin ~ %
-```
-
-This can be easily achieved by [providing an alias to a target in your inventory file](https://puppet.com/docs/bolt/latest/inventory_file_v2.html#provide-an-alias-to-a-target), e.g.:
-
-```yaml
-version: 2
-targets:
-  - host1.example.com
-  - uri: host2.example.com
-    alias: puppet
-  - host3.example.com
-```
-
-## Commissioning a new node
-
-Adjust your inventory file so that you can connect as root without specifying arguments.  The exact command `bolt command run id -n host4.example.com` should succeed show you are _root_.
+To setup site-specific plan for your *ACME* organization, start with your Bolt project:
 
 ```sh-session
-romain@marvin ~ % bolt command run id -n host4.example.com
-Started on host4.example.com...
-Finished on host4.example.com:
-  STDOUT:
-    uid=0(root) gid=0(root) groups=0(root)
-Successful on 1 node: host4.example.com
-Ran on 1 node in 2.12 sec
-```
-This can be achieved using something similar to the following in your inventory file:
+romain@marvin ~ % bolt project init --modules opuslabs-commission acme
+Installing project modules
 
-```yaml
-version: 2
-targets:
-  - name: "host4.example.com"
-    uri: "host4.example.com"
-    config:
-      ssh:
-        user: "root"
-        password: "secret"
-  - name: "host5.example.com"
-    uri: "host5.example.com"
-    config:
-      ssh:
-        user: "root"
-        password: "secret"
+  → Resolving module dependencies, this might take a moment
+
+  → Writing Puppetfile at ~/acme/Puppetfile
+
+  → Syncing modules from ~/acme/Puppetfile to ~/acme/.modules
+
+  → Generating type references
+
+Successfully synced modules from ~/acme/Puppetfile to ~/acme/.modules
+romain@marvin % cd acme
+romain@marvin ~/acme % mkdir -p modules/acme/plans
+romain@marvin ~/acme % sed -e 's/commission::commission/acme::commission/' < .modules/commission/plans/commission.pp > modules/acme/plans/commission.pp
+romain@marvin ~/acme % bolt plan show
+Plans
+  acme::commission       Commission a node and connect it to the Puppet infrastructure
+[...]
 ```
 
-You can then commission the nodes:
+Edit the `modules/acme/plans/commission.pp` plan to fit your site policies, requirements, etc.  Feel free to hardcode the puppet server name, fetch data from PuppetDB, prompt the user for inputs, and so on…  When done, setup a decommissioning plan in a similar fashion.
+
+## Commissioning nodes
 
 ```
-bolt plan run commission::commission -n host4.example.com,host5.example.com custom_facts=example_fact1=true,example_fact2=false puppet_settings=server=puppet.example.com,splay=true
+romain@marvin ~/acme % bolt plan run acme::commission -t node1.example.com,node2.example.com
 ```
 
-### Optional parameters:
-
-#### `custom_facts`
-
-A coma-separated list of `name=value` facts.  Each fact will be configured as a structured data fact using a YAML file.
-
-Example: `custom_facts=customer=foo,provider=bar`
-
-#### `puppet_settings`
-
-A coma-separated list of `name=value` settings.
-
-Example: `puppet_settings=server=puppet.example.com,splay=true`
-
-## Decommissioning an old node
+## Decommissioning nodes
 
 ```
-bolt plan run commission::decommission -n host1.example.com,host3.example.com
+romain@marvin ~/acme % bolt plan run acme::decommission -t node1.example.com,node2.example.com
 ```
