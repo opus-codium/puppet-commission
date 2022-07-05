@@ -1,0 +1,11 @@
+{
+  "description": "Revoke certificates on the Puppet Server",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "input_method": "stdin",
+  "parameters": {
+    "certificates": {
+      "description": "The certificates to revoke",
+      "type": "Array[String[1]]"
+    }
+  }
+}
