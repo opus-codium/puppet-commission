@@ -5,7 +5,7 @@ plan commission::decommission(
   TargetSpec $nodes,
   Optional[String[1]] $puppetserver = undef,
 ) {
-  $puppetserver_node = $puppetserver.lest || { prompt('puppetserver') }
+  $puppetserver_node = $puppetserver.lest || { prompt('puppetserver', 'default' => 'puppet') }
 
   upload_file('commission/motd.decommissioned', '/etc/motd', $nodes, '_run_as' => 'root')
 

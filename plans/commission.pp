@@ -8,13 +8,15 @@
 # @param country The country the nodes are located in
 plan commission::commission(
   TargetSpec          $nodes,
-  String[1]           $puppetserver = 'puppet',
-  Optional[String[1]] $customer = undef,
-  Optional[String[1]] $provider = undef,
-  Optional[String[1]] $city     = undef,
-  Optional[String[1]] $country  = undef,
+  Optional[String[1]] $puppetserver = undef,
+  Optional[String[1]] $customer     = undef,
+  Optional[String[1]] $provider     = undef,
+  Optional[String[1]] $city         = undef,
+  Optional[String[1]] $country      = undef,
 ) {
   $commission_timestamp = Timestamp()
+
+  $puppetserver_node = $puppetserver.lest || { prompt('puppetserver', 'default' => 'puppet') }
 
   $custom_facts = {
     customer => $customer.lest || { prompt('Customer') },
@@ -24,7 +26,7 @@ plan commission::commission(
   }
 
   $puppet_settings = {
-    server => $puppetserver,
+    server => $puppetserver_node,
     splay  => true,
   }
 
@@ -42,7 +44,7 @@ plan commission::commission(
 
       Array([$certname, $result.value])
   })
-  run_task('commission::sign_certificate_requests', $puppetserver, '_run_as' => 'root', certificate_requests => $certificate_requests)
+  run_task('commission::sign_certificate_requests', $puppetserver_node, '_run_as' => 'root', certificate_requests => $certificate_requests)
 
   run_task('service', $nodes, 'Starting puppet', '_run_as' => 'root', 'action' => 'start', 'name' => 'puppet')
   run_task('commission::add_custom_facts', $nodes, '_run_as' => 'root', 'facts' => { 'comissioned_at' => Timestamp() })
