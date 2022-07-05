@@ -14,6 +14,8 @@ class GetCertificateRequest < TaskHelper
       ENV['PATH'] = "/opt/puppetlabs/puppet/bin:#{ENV['PATH']}"
     end
 
+    `puppet ssl bootstrap --waitforcert 0`
+
     `puppet agent --fingerprint` =~ /\A\(([^)]+)\)\s+([[:xdigit:]:]+)/
 
     {
