@@ -47,5 +47,5 @@ plan commission::commission(
   run_task('commission::sign_certificate_requests', $puppetserver_node, '_run_as' => 'root', certificate_requests => $certificate_requests)
 
   run_task('service', $nodes, 'Starting puppet', '_run_as' => 'root', 'action' => 'start', 'name' => 'puppet')
-  run_task('commission::add_custom_facts', $nodes, '_run_as' => 'root', 'facts' => { 'comissioned_at' => Timestamp() })
+  run_task('commission::add_custom_facts', $nodes, '_run_as' => 'root', 'facts' => { 'comissioned_at' => String(Timestamp()) })
 }
