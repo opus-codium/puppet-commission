@@ -20,7 +20,9 @@ Use this module to setup commissioning / decommissioning plans tailored to your 
 To setup site-specific plan for your *ACME* organization, start with your Bolt project:
 
 ```sh-session
-romain@marvin ~ % bolt project init --modules opuslabs-commission acme
+romain@marvin % mkdir acme
+romain@marvin % cd acme
+romain@marvin ~/acme % bolt project init --modules opuscodium-commission acme
 Installing project modules
 
   → Resolving module dependencies, this might take a moment
@@ -32,7 +34,6 @@ Installing project modules
   → Generating type references
 
 Successfully synced modules from ~/acme/Puppetfile to ~/acme/.modules
-romain@marvin % cd acme
 romain@marvin ~/acme % mkdir -p modules/acme/plans
 romain@marvin ~/acme % sed -e 's/commission::commission/acme::commission/' < .modules/commission/plans/commission.pp > modules/acme/plans/commission.pp
 romain@marvin ~/acme % bolt plan show
