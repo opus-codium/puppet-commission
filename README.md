@@ -34,15 +34,15 @@ Installing project modules
   → Generating type references
 
 Successfully synced modules from ~/acme/Puppetfile to ~/acme/.modules
-romain@marvin ~/acme % mkdir -p modules/acme/plans
-romain@marvin ~/acme % sed -e 's/commission::commission/acme::commission/' < .modules/commission/plans/commission.pp > modules/acme/plans/commission.pp
+romain@marvin ~/acme % mkdir -p plans
+romain@marvin ~/acme % sed -e 's/commission::commission/acme::commission/' < .modules/commission/plans/commission.pp > plans/commission.pp
 romain@marvin ~/acme % bolt plan show
 Plans
   acme::commission       Commission a node and connect it to the Puppet infrastructure
 [...]
 ```
 
-Edit the `modules/acme/plans/commission.pp` plan to fit your site policies, requirements, etc.  Feel free to hardcode the puppet server name, fetch data from PuppetDB, prompt the user for inputs, and so on…  When done, setup a decommissioning plan in a similar fashion.
+Edit the `plans/commission.pp` plan to fit your site policies, requirements, etc.  Feel free to hardcode the puppet server name, fetch data from PuppetDB, prompt the user for inputs, and so on…  When done, setup a decommissioning plan in a similar fashion.
 
 ## Commissioning nodes
 
