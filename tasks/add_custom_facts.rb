@@ -21,6 +21,8 @@ class CustomFactsAdder < TaskHelper
       custom_facts_dir = case osfamily
                          when 'FreeBSD'
                            '/usr/local/etc/facter/facts.d'
+                         when 'windows'
+                           'C:\ProgramData\PuppetLabs\facter\facts.d'
                          else
                            '/etc/puppetlabs/facter/facts.d'
                          end
