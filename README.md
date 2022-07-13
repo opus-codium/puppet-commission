@@ -35,7 +35,7 @@ Installing project modules
 
 Successfully synced modules from ~/acme/Puppetfile to ~/acme/.modules
 romain@marvin ~/acme % mkdir -p plans
-romain@marvin ~/acme % sed -e 's/commission::commission/acme::commission/' < .modules/commission/plans/commission.pp > plans/commission.pp
+romain@marvin ~/acme % sed -e 's/commission::commission/acme::commission/' -e '/@api private/,+1d' < .modules/commission/plans/commission.pp > plans/commission.pp
 romain@marvin ~/acme % bolt plan show
 Plans
   acme::commission       Commission a node and connect it to the Puppet infrastructure

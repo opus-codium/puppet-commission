@@ -1,4 +1,6 @@
-# Commission a node and connect it to the Puppet infrastructure
+# Commission nodes and connect them to the Puppet infrastructure
+#
+# @api private
 #
 # @param nodes The nodes to commission
 # @param puppetserver The Puppet Server that manage the nodes

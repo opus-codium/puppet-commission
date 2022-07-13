@@ -1,6 +1,9 @@
-# Decommission a node and disconnect it from the Puppet infrastructure
+# Decommission nodes and disconnect them from the Puppet infrastructure
+#
+# @api private
 #
 # @param nodes The nodes to decommission
+# @param puppetserver The Puppet Server that manage the nodes
 plan commission::decommission(
   TargetSpec $nodes,
   Optional[String[1]] $puppetserver = undef,
