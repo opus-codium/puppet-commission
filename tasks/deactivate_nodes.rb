@@ -11,7 +11,7 @@ class DeactivateNodes < TaskHelper
       ENV['PATH'] = "/opt/puppetlabs/puppet/bin:#{ENV['PATH']}"
     end
 
-    system('puppet', 'node', 'deactivate', *nodes) || raise(TaskHelper::Error.new('Failed to deactivate nodes', 'deactivate_nodes', 'puppet exited with a non-null error code'))
+    system('puppet', 'node', 'deactivate', *nodes) || raise(TaskHelper::Error.new('Failed to deactivate nodes', 'deactivate_nodes'))
 
     nil
   end

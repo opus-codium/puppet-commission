@@ -12,7 +12,7 @@ class SetPuppetConfig < TaskHelper
     end
 
     settings.each do |setting_name, setting_value|
-      system('puppet', 'config', 'set', setting_name.to_s, setting_value.to_s) || raise(TaskHelper::Error.new('Failed to set setting', 'set_puppet_config', 'puppet exited with a non-null error code'))
+      system('puppet', 'config', 'set', setting_name.to_s, setting_value.to_s) || raise(TaskHelper::Error.new('Failed to set setting', 'set_puppet_config'))
     end
 
     nil
