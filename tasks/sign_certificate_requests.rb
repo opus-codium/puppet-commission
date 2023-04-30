@@ -25,16 +25,17 @@ class SignCertificateRequests < TaskHelper
 
   def pending_requests
     @pending_requests ||= begin
-                            res = {}
-                            `puppetserver ca list`.lines.map do |line|
-                              next unless line =~ /\A\s*(\S+)\s+\(([^)]+)\)\s+([[:xdigit:]:]+)/
-                              res[Regexp.last_match(1).to_sym] = {
-                                digest: Regexp.last_match(2),
-                                fingerprint: Regexp.last_match(3),
-                              }
-                            end
-                            res
-                          end
+      res = {}
+      `puppetserver ca list`.lines.map do |line|
+        next unless line =~ %r{\A\s*(\S+)\s+\(([^)]+)\)\s+([[:xdigit:]:]+)}
+
+        res[Regexp.last_match(1).to_sym] = {
+          digest: Regexp.last_match(2),
+          fingerprint: Regexp.last_match(3),
+        }
+      end
+      res
+    end
   end
 end
 

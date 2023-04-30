@@ -34,7 +34,7 @@ class CustomFactsAdder < TaskHelper
       fact_yaml_path = File.join(custom_facts_dir, "#{key}.yaml")
       fact_yaml = { key.to_s => value }.to_yaml
 
-      IO.write(fact_yaml_path, fact_yaml)
+      File.write(fact_yaml_path, fact_yaml)
     end
 
     nil
