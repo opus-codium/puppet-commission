@@ -12,12 +12,12 @@ class SignCertificateRequests < TaskHelper
     end
 
     certificate_requests.each do |node, details|
-      if pending_requests[node] == details
-        system('puppetserver', 'ca', 'sign', '--certname', node.to_s) || raise(TaskHelper::Error.new('Failed to sign certificate requests', 'sign_certificate_requests'))
-      else
+      if pending_requests[node] != details
         raise TaskHelper::Error.new("No certificate request was fournd for #{node} with digest #{details[:digest]} and fingerprint #{details[:fingerprint]}",
                                     'sign_agent_certificate/certificate_request_not_found')
       end
+
+      system('puppetserver', 'ca', 'sign', '--certname', node.to_s) || raise(TaskHelper::Error.new('Failed to sign certificate requests', 'sign_certificate_requests'))
     end
 
     nil
