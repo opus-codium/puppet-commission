@@ -17,7 +17,7 @@ class GetCertificateRequest < TaskHelper
     bootrap_output = `puppet ssl bootstrap --color false --waitforcert 0 2>&1`
 
     fingerprint_output = `puppet agent --color false --fingerprint 2>&1`
-    fingerprint_output =~ /\A\(([^)]+)\)\s+([[:xdigit:]:]+)/
+    fingerprint_output =~ %r{\A\(([^)]+)\)\s+([[:xdigit:]:]+)}
     raise(TaskHelper::Error.new("Failed to get certificate request\n===> `puppet ssl bootstrap --waitforcert 0` output:\n#{bootrap_output}\n===> `puppet agent --fingerprint` output:\n#{fingerprint_output}", 'get_certificate_request')) if Regexp.last_match.nil?
 
     {
