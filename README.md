@@ -1,7 +1,7 @@
 # puppet-commission
 
 <!-- header GFM -->
-[![Build Status](https://img.shields.io/github/workflow/status/opus-codium/puppet-commission/Release)](https://github.com/opus-codium/puppet-commission/releases)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/opus-codium/puppet-commission/release.yml)](https://github.com/opus-codium/puppet-commission/releases)
 [![Puppet Forge](https://img.shields.io/puppetforge/v/opuscodium/commission.svg)](https://forge.puppetlabs.com/opuscodium/commission)
 [![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/opuscodium/commission.svg)](https://forge.puppetlabs.com/opuscodium/commission)
 [![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/opuscodium/commission.svg)](https://forge.puppetlabs.com/opuscodium/commission)
