@@ -7,8 +7,8 @@ class SetPuppetConfig < TaskHelper
   def task(settings:, **_kwargs)
     # Prepend AIO path if it exist and is not in $PATH
     if File.directory?('/opt/puppetlabs/puppet/bin') &&
-       !ENV['PATH'].split(':').include?('/opt/puppetlabs/puppet/bin')
-      ENV['PATH'] = "/opt/puppetlabs/puppet/bin:#{ENV['PATH']}"
+       !ENV.fetch('PATH').split(':').include?('/opt/puppetlabs/puppet/bin')
+      ENV['PATH'] = "/opt/puppetlabs/puppet/bin:#{ENV.fetch('PATH')}"
     end
 
     settings.each do |setting_name, setting_value|
