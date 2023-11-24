@@ -1,6 +1,6 @@
 {
   "name": "opuscodium-commission",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "author": "Opus Codium",
   "summary": "Commission / decommission Puppet nodes easily",
   "license": "MIT",
