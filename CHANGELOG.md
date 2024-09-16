@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v1.1.0](https://github.com/opus-codium/puppet-commission/tree/v1.1.0) (2024-09-16)
+
+[Full Changelog](https://github.com/opus-codium/puppet-commission/compare/v1.0.0...v1.1.0)
+
+**Implemented enhancements:**
+
+- Add support for FreeBSD 14 [\#30](https://github.com/opus-codium/puppet-commission/pull/30) ([smortex](https://github.com/smortex))
+- Add support for Debian 12 [\#29](https://github.com/opus-codium/puppet-commission/pull/29) ([smortex](https://github.com/smortex))
+
+**Fixed bugs:**
+
+- Fix AIO path for PuppetServer [\#31](https://github.com/opus-codium/puppet-commission/pull/31) ([smortex](https://github.com/smortex))
+
 ## [v1.0.0](https://github.com/opus-codium/puppet-commission/tree/v1.0.0) (2023-11-24)
 
 [Full Changelog](https://github.com/opus-codium/puppet-commission/compare/39afd208774501af9b4c395bdd7e1e2a45c66039...v1.0.0)
