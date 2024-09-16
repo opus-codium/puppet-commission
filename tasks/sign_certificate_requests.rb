@@ -13,7 +13,7 @@ class SignCertificateRequests < TaskHelper
 
     certificate_requests.each do |node, details|
       if pending_requests[node] != details
-        raise TaskHelper::Error.new("No certificate request was fournd for #{node} with digest #{details[:digest]} and fingerprint #{details[:fingerprint]}",
+        raise TaskHelper::Error.new("No certificate request was found for #{node} with digest #{details[:digest]} and fingerprint #{details[:fingerprint]}",
                                     'sign_agent_certificate/certificate_request_not_found')
       end
 
