@@ -6,14 +6,14 @@ require_relative '../../ruby_task_helper/files/task_helper'
 class SignCertificateRequests < TaskHelper
   def task(certificate_requests:, **_kwargs)
     # Prepend AIO path if it exist and is not in $PATH
-    if File.directory?('/opt/puppetlabs/puppet/bin') &&
-       !ENV.fetch('PATH').split(':').include?('/opt/puppetlabs/puppet/bin')
-      ENV['PATH'] = "/opt/puppetlabs/puppet/bin:#{ENV.fetch('PATH')}"
+    if File.directory?('/opt/puppetlabs/bin') &&
+       !ENV.fetch('PATH').split(':').include?('/opt/puppetlabs/bin')
+      ENV['PATH'] = "/opt/puppetlabs/bin:#{ENV.fetch('PATH')}"
     end
 
     certificate_requests.each do |node, details|
       if pending_requests[node] != details
-        raise TaskHelper::Error.new("No certificate request was fournd for #{node} with digest #{details[:digest]} and fingerprint #{details[:fingerprint]}",
+        raise TaskHelper::Error.new("No certificate request was found for #{node} with digest #{details[:digest]} and fingerprint #{details[:fingerprint]}",
                                     'sign_agent_certificate/certificate_request_not_found')
       end
 
