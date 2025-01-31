@@ -9,9 +9,9 @@ require_relative '../../ruby_task_helper/files/task_helper'
 class GetCertificateRequest < TaskHelper
   def task(**_kwargs)
     # Prepend AIO path if it exist and is not in $PATH
-    if File.directory?('/opt/puppetlabs/puppet/bin') &&
-       !ENV.fetch('PATH').split(':').include?('/opt/puppetlabs/puppet/bin')
-      ENV['PATH'] = "/opt/puppetlabs/puppet/bin:#{ENV.fetch('PATH')}"
+    if File.directory?('/opt/puppetlabs/bin') &&
+       !ENV.fetch('PATH').split(':').include?('/opt/puppetlabs/bin')
+      ENV['PATH'] = "/opt/puppetlabs/bin:#{ENV.fetch('PATH')}"
     end
 
     bootrap_output = `puppet ssl bootstrap --color false --waitforcert 0 2>&1`
