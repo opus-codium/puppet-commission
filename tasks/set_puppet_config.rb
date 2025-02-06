@@ -6,9 +6,9 @@ require_relative '../../ruby_task_helper/files/task_helper'
 class SetPuppetConfig < TaskHelper
   def task(settings:, **_kwargs)
     # Prepend AIO path if it exist and is not in $PATH
-    if File.directory?('/opt/puppetlabs/puppet/bin') &&
-       !ENV.fetch('PATH').split(':').include?('/opt/puppetlabs/puppet/bin')
-      ENV['PATH'] = "/opt/puppetlabs/puppet/bin:#{ENV.fetch('PATH')}"
+    if File.directory?('/opt/puppetlabs/bin') &&
+       !ENV.fetch('PATH').split(':').include?('/opt/puppetlabs/bin')
+      ENV['PATH'] = "/opt/puppetlabs/bin:#{ENV.fetch('PATH')}"
     end
 
     settings.each do |setting_name, setting_value|
