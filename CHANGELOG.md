@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v1.2.0](https://github.com/opus-codium/puppet-commission/tree/v1.2.0) (2025-05-21)
+
+[Full Changelog](https://github.com/opus-codium/puppet-commission/compare/v1.1.0...v1.2.0)
+
+**Implemented enhancements:**
+
+- Allow puppetlabs/ruby\_task\_helper 1.x [\#35](https://github.com/opus-codium/puppet-commission/pull/35) ([smortex](https://github.com/smortex))
+
+**Fixed bugs:**
+
+- Fix AIO path [\#33](https://github.com/opus-codium/puppet-commission/pull/33) ([smortex](https://github.com/smortex))
+
 ## [v1.1.0](https://github.com/opus-codium/puppet-commission/tree/v1.1.0) (2024-09-16)
 
 [Full Changelog](https://github.com/opus-codium/puppet-commission/compare/v1.0.0...v1.1.0)
